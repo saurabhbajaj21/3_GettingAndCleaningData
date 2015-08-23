@@ -1,5 +1,5 @@
 # Merges the training and the test sets to create one data set.
-# Merge X
+# Merge X  ()
 x_train <- read.table('./UCI HAR Dataset/train/X_train.txt')
 x_test <- read.table('./UCI HAR Dataset/test/X_test.txt')
 x <- rbind(x_train, x_test)
@@ -50,7 +50,8 @@ write.table(tidy_data, 'data_mean.sd.txt', row.names = FALSE)
 
 tidy_data_average <- aggregate(x=tidy_data, 
                                by=list(activities=tidy_data$activity, 
-                                       subject=tidy_data$subject), 
+                                       subj=tidy_data$subject), 
                                                 FUN = mean)
 tidy_data_average <- tidy_data_average[, !(colnames(tidy_data_average) %in% c("subject", "activity"))]
+str(tidy_data_average)
 write.table(tidy_data_average, 'tidy_data_average.txt', row.names = FALSE)
